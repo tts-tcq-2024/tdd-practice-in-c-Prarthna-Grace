@@ -3,7 +3,7 @@
 #include <ctype.h>
 
 int isEmpty(const char* input){
-  return (isdigit(*input)); {
+  return (isdigit(*input));
 }
 
 void String_function(const char*input){
