@@ -20,7 +20,7 @@ int isEmpty(const char* input) {
     return (input[0] == '\0');  // Return 1 if string is empty, 0 otherwise
 }
 
-int add(const char*input){
+int add(const char* input){
     if (isEmpty(input) || !(Check_numbers(input))) {
         return 0;  // Return 0 if the input is empty or contains no digits
     }
