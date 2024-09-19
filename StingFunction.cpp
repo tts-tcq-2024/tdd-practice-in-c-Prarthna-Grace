@@ -6,10 +6,11 @@ int isEmpty(const char* input){
   return (isdigit(*input));
 }
 
-void add(const char*input, char* result){
+int add(const char*input{
   if(!(isEmpty(input))){
-      result[0]='\0';
+      char result[0]='\0';
    }
+  return result;
 }
   
 
