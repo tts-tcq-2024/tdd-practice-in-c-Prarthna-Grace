@@ -10,6 +10,6 @@ void String_function(const char*input, char* result){
   if(!(isEmpty(input))){
       result[0]='\0';
    }
-]
+}
   
 
