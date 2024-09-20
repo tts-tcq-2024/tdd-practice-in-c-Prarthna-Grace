@@ -53,7 +53,7 @@ int add(const char* input){
         break;
     }
    int result= AddifValid(input,len);
-    return result;
+return result;
 }
 
 
