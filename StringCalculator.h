@@ -12,7 +12,7 @@ int Check_numbers(const char* input) {
         }
         input++;  // Move to the next character
     }
-    return 1;  // Return 0 if no digits are found
+    return 1;  // Return 1 if no digits are found
 }
 
 // Function to check if the input string is empty
