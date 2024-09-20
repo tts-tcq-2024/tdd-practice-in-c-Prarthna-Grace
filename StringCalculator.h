@@ -8,7 +8,7 @@ int add(const char* input);
 int Check_numbers(const char* input) {
     while (*input) {
         if (isdigit(*input)) {
-            return 0;  // Return 1 (true) if any digit is found
+            return 0;  // Return 0 (true) if any digit is found
         }
         input++;  // Move to the next character
     }
@@ -22,8 +22,7 @@ int isEmpty(const char* input) {
 
 // Function to check if the input string is a single zero
 int SingleZero(const char*input, int len){
-    if(len ==1 && input[0]==0)
-        return 1;
+    return (len ==1 && input[0]==0);    
 }
 
 int add(const char* input){
