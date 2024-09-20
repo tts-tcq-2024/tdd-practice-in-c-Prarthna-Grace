@@ -17,13 +17,22 @@ int Check_numbers(const char* input) {
 
 // Function to check if the input string is empty
 int isEmpty(const char* input) {
-    return (input[0] == '\0' || input=='0');  // Return 1 if string is empty, 0 otherwise
+    return (input[0] == '\0');  // Return 1 if string is empty, 0 otherwise
+}
+
+// Function to check if the input string is a single zero
+int SingleZero(const char*input, int len)
+{
+    if(len ==1 && input[0]==0)
+        return 0;
 }
 
 int add(const char* input){
     if (isEmpty(input) || !(Check_numbers(input))) {
         return 0;  // Return 0 if the input is empty or contains no digits
     }
+    int len= strlen(input);
+    SingleZero(input,len);  
 }
 
 
