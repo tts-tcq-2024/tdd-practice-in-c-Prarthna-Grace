@@ -29,12 +29,12 @@ int SingleZero(const char*input, int len){
 int add(const char* input){
     int len= strlen(input); 
     int returnEmpty=0;
-    if (isEmpty(input) || !(Check_numbers(input)) // Return 0 if the input is empty or contains no digits
+    if(isEmpty(input) || !(Check_numbers(input))) // Return 0 if the input is empty or contains no digits
     {
         returnEmpty=1;
     }  
     returnEmpty &= SingleZero(input,len);
-    if (returnEmpty == 1)
+    if(returnEmpty == 1)
     {
         return 0;
     }
