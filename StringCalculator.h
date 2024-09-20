@@ -35,9 +35,6 @@ int result=0;
     }
     return result;
 }
-        
-
-int result = input[i] + input[j+1]
 
 int add(const char* input){
     int len= strlen(input); 
