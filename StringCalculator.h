@@ -1,4 +1,4 @@
-e#include<stdio.h>
+#include<stdio.h>
 #include<string.h>
 #include <ctype.h>
 
@@ -27,7 +27,7 @@ int SingleZero(const char*input){
 
 int AddifValid(const char*input, int len){
 int result=0; 
-   if(len ==3){
+   if(len ==3 && input[2]==','){
         result= input[0]+input[2];
     }
     return result;
@@ -42,13 +42,12 @@ int add(const char* input){
         returnEmpty |= SingleZero(input);
     }
     if(returnEmpty == 1)
-    {
+    { 
         return 0;
     }
     else{
-        switch input[1]{
-        case ' ; result = AddifValid(input,len);
-            }
+        result = AddifValid(input,len);
+    }
    return result;
 }
 
