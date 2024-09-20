@@ -21,8 +21,8 @@ int isEmpty(const char* input) {
 }
 
 // Function to check if the input string is a single zero
-int SingleZero(const char*input, int len){
-    return (len ==1 && input[0]==0);    
+int SingleZero(const char*input){
+    return (input[0]=='0');    
 }
 
 int add(const char* input){
@@ -30,7 +30,9 @@ int add(const char* input){
     int returnEmpty=0; 
     returnEmpty |= isEmpty(input);
     returnEmpty |= Check_numbers(input);
-    returnEmpty |= SingleZero(input,len);
+    if(len==1){
+        returnEmpty |= SingleZero(input);
+    }
     if(returnEmpty == 1)
     {
         return 0;
