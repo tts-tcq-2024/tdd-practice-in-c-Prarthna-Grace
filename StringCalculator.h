@@ -35,7 +35,7 @@ int result=0;
 
 int add(const char* input){
     int len= strlen(input); 
-    int returnEmpty=0; 
+    int returnEmpty=0, result=0; 
     returnEmpty |= isEmpty(input);
     returnEmpty |= Check_numbers(input);
     if(len==1){
