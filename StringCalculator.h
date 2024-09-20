@@ -24,15 +24,14 @@ int isEmpty(const char* input) {
 int SingleZero(const char*input, int len)
 {
     if(len ==1 && input[0]==0)
-        return 0;
+        return 1;
 }
 
 int add(const char* input){
-    if (isEmpty(input) || !(Check_numbers(input))) {
+    if (isEmpty(input) || !(Check_numbers(input)) || SingleZero(input,len)) {
         return 0;  // Return 0 if the input is empty or contains no digits
     }
-    int len= strlen(input);
-    SingleZero(input,len);  
+    int len= strlen(input); 
 }
 
 
