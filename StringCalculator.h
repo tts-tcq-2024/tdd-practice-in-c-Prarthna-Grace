@@ -25,6 +25,18 @@ int SingleZero(const char*input){
     return (input[0]=='0');    
 }
 
+int AddifValid(const char*input, int len){
+int result=0;
+int i=0, int j=i+1;    
+if(input[j]==','){
+    result= input[i]+input[j=1];
+}
+return result;
+}
+        
+
+int result = input[i] + input[j+1]
+
 int add(const char* input){
     int len= strlen(input); 
     int returnEmpty=0; 
@@ -36,8 +48,9 @@ int add(const char* input){
     if(returnEmpty == 1)
     {
         return 0;
+        break;
     }
-    
+    AddifValid(input,len);
 }
 
 
