@@ -47,10 +47,9 @@ int add(const char* input){
     if(returnEmpty == 1)
     {
         return 0;
-        break;
     }
    int result= AddifValid(input,len);
-return result;
+   return result;
 }
 
 
