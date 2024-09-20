@@ -8,11 +8,11 @@ int add(const char* input);
 int Check_numbers(const char* input) {
     while (*input) {
         if (isdigit(*input)) {
-            return 1;  // Return 1 (true) if any digit is found
+            return 0;  // Return 1 (true) if any digit is found
         }
         input++;  // Move to the next character
     }
-    return 0;  // Return 0 if no digits are found
+    return 1;  // Return 0 if no digits are found
 }
 
 // Function to check if the input string is empty
@@ -28,11 +28,9 @@ int SingleZero(const char*input, int len){
 
 int add(const char* input){
     int len= strlen(input); 
-    int returnEmpty=0;
-    if(isEmpty(input) || !(Check_numbers(input))) // Return 0 if the input is empty or contains no digits
-    {
-        returnEmpty=1;
-    }  
+    int returnEmpty=0; 
+    returnEmpty &= isEmpty(input);
+    returnEmpty &= Check_numbers(input);
     returnEmpty &= SingleZero(input,len);
     if(returnEmpty == 1)
     {
