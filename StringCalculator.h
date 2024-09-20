@@ -27,10 +27,7 @@ int SingleZero(const char*input){
 
 int AddifValid(const char*input, int len){
 int result=0; 
-    if(input[0]>1000 || input[2]>1000){
-        result = 0;
-    }
-    else if(len ==3 && input[1]==','){
+   if(len ==3 && input[1]==','){
         result= input[0]+input[2];
     }
     return result;
