@@ -21,7 +21,7 @@ int isEmpty(const char* input) {
 }
 
 int add(const char* input){
-    if (isEmpty(input) || !(Check_numbers(input))) {
+    if (isEmpty(input) || !(Check_numbers(input) || input==0)) {
         return 0;  // Return 0 if the input is empty or contains no digits
     }
 }
