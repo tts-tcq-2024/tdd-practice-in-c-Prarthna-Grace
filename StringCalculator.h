@@ -17,7 +17,7 @@ int Check_numbers(const char* input) {
 
 // Function to check if the input string is empty
 int isEmpty(const char* input) {
-    return (input[0] == '\0' || input==0);  // Return 1 if string is empty, 0 otherwise
+    return (input[0] == '\0' || input=='0');  // Return 1 if string is empty, 0 otherwise
 }
 
 int add(const char* input){
