@@ -29,9 +29,9 @@ int SingleZero(const char*input, int len){
 int add(const char* input){
     int len= strlen(input); 
     int returnEmpty=0; 
-    returnEmpty &= isEmpty(input);
-    returnEmpty &= Check_numbers(input);
-    returnEmpty &= SingleZero(input,len);
+    returnEmpty |= isEmpty(input);
+    returnEmpty |= Check_numbers(input);
+    returnEmpty |= SingleZero(input,len);
     if(returnEmpty == 1)
     {
         return 0;
