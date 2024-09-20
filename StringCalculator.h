@@ -32,7 +32,7 @@ return input1+input2;
 
 int AddifValid(const char*input, int len){
 int result=0; 
-   if(len ==3 && input[2]==','){
+   if(len ==3 && input[1]==','){
         result= FunctionforAdd(input[0],input[2]);
     }
     return result;
