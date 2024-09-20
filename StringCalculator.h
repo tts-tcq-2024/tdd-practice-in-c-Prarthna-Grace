@@ -26,10 +26,5 @@ int add(const char* input){
     }
 }
 
-// Test the functions
-int main() {
-    int result = add(input);
-    return 0;
-}
 
 
