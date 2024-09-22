@@ -50,12 +50,16 @@ int AddifValid(const char* input) {
 }
 
 int add(const char* input){
-    int len= strlen(input); 
+    // Create a modifiable copy of the input
+    char input_copy[100];
+    strncpy(input_copy, input, sizeof(input_copy) - 1);
+    input_copy[sizeof(input_copy) - 1] = '\0';  // Ensure null termination
+    int len= strlen(input_copy); 
     int returnEmpty=0, result=0; 
-    returnEmpty |= isEmpty(input);
-    returnEmpty |= Check_numbers(input);
+    returnEmpty |= isEmpty(input_copy);
+    returnEmpty |= Check_numbers(input_copy);
     if(len==1){
-        returnEmpty |= SingleZero(input);
+        returnEmpty |= SingleZero(input_copy);
     }
     if(returnEmpty == 1)
     { 
@@ -64,7 +68,7 @@ int add(const char* input){
     else
     {
         replace_newline_with_comma(input_copy);  // Replace newlines with commas
-        result = AddifValid(input);
+        result = AddifValid(input_copy);
         return result;
     } 
 }
