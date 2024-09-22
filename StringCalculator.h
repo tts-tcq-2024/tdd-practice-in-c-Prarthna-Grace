@@ -35,7 +35,7 @@ int AddifValid(const char* input) {
 }
 
 int replace_newline_with_comma(const char* input){
-    for (char* p = input; *p; ++p){
+    for ( const char* p = input; *p; ++p){
         if (*p == '\n') {
             input[0] = input[0] - '0' + input[1] - '0' ;  // Replace newline with comma 
             return input;
@@ -57,7 +57,7 @@ int add(const char* input){
     }
     else
     {
-        int input_copy[5]= replace_newline_with_comma(input);
+        const char* input_copy[5]= replace_newline_with_comma(input);
         result = AddifValid(input_copy);
         return result;
     } 
