@@ -37,10 +37,12 @@ void replace_newline_with_comma(char* input) {
 
 int AddifValid(const char* input) {
     int sum = 0;
-    char* input_copy = strdup(input);  // Duplicate input to avoid modifying the original
+    char* input_copy = strdup(input);  // Duplicate input string
     char* token = strtok(input_copy, ",");  // Tokenize by comma
     
     while (token) {
+        if(token>1000){
+            token=0;
         sum += atoi(token);  // Convert token to integer and add to sum
         token = strtok(NULL, ",");  // Continue tokenizing
     }
@@ -50,7 +52,7 @@ int AddifValid(const char* input) {
 }
 
 int add(const char* input){
-    // Create a modifiable copy of the input
+    // Create a copy of the input
     char input_copy[100];
     strncpy(input_copy, input, sizeof(input_copy) - 1);
     input_copy[sizeof(input_copy) - 1] = '\0';  // Ensure null termination
