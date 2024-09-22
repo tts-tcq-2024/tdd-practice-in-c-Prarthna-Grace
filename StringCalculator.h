@@ -34,8 +34,8 @@ int AddifValid(const char* input) {
     return 0;  // Return 0 if format is invalid
 }
 
-void replace_newline_with_comma(char* input) {
-    for (char* p = input; *p; ++p) {
+void replace_newline_with_comma(char* input){
+    for (char* p = input; *p; ++p){
         if (*p == '\n') {
             input[0] = input[0] - '0' + input[1] - '0' ;  // Replace newline with comma 
         }
