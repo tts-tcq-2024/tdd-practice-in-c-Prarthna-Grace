@@ -39,14 +39,14 @@ int AddifValid(const char* input) {
     int sum = 0;
     char* input_copy = strdup(input);  // Duplicate input string
     char* token = strtok(input_copy, ",");  // Tokenize by comma
-    
+
     while (token) {
-        if(token>1000){
-            token=0;
-        sum += atoi(token);  // Convert token to integer and add to sum
+        int number = atoi(token);  // Convert token to integer
+        if (number <= 1000) {
+            sum += number;  // Add to sum if the number is 1000 or less
+        }
         token = strtok(NULL, ",");  // Continue tokenizing
     }
-
     free(input_copy);  // Free the duplicated string
     return sum;
 }
