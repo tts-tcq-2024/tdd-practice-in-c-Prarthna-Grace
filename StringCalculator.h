@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include <ctype.h>
+#include<stdlib.h>
 
 int add(const char* input);
 
@@ -27,7 +28,7 @@ int SingleZero(const char*input){
 
 int FunctionforAdd(int input1, int input2) //Function for adding two numbers
 {
-return input1+input2;
+return atoi(input1)+atoi(input2);
 }
 
 int AddifValid(const char*input, int len){
