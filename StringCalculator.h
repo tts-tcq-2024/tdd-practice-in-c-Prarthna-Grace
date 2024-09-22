@@ -35,6 +35,13 @@ void replace_newline_with_comma(char* input) {
     }
 }
 
+//Function to check if the input numbers are valid for addition
+int number_if_valid(int number) 
+{
+return (number <= 1000 && number>=0);
+}
+
+//Function to add valid inputs
 int AddifValid(const char* input) {
     int sum = 0;
     char* input_copy = strdup(input);  // Duplicate input string
@@ -42,7 +49,7 @@ int AddifValid(const char* input) {
 
     while (token) {
         int number = atoi(token);  // Convert token to integer
-        if (number <= 1000 && number>=0) {
+        if (number_validity(number)) {
             sum += number;  // Add to sum if the number is 1000 or less
         }
         token = strtok(NULL, ",");  // Continue tokenizing
