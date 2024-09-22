@@ -57,7 +57,7 @@ int add(const char* input){
     }
     else
     {
-        char* input_copy= replace_newline_with_comma(input);
+        int input_copy= replace_newline_with_comma(input);
         result = AddifValid(input_copy);
         return result;
     } 
