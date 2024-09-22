@@ -26,15 +26,10 @@ int SingleZero(const char*input){
     return (input[0]=='0');    
 }
 
-int FunctionforAdd(int input1, int input2) //Function for adding two numbers
-{
-return atoi(input1)+atoi(input2);
-}
-
-int AddifValid(const char*input, int len){
+int AddifValid(const char* input, int len){
 int result=0; 
    if(len ==3 && input[1]==','){
-        result= FunctionforAdd(input[0],input[2]);
+        result= atoi(input[0]) + atoi(input[2]);
     }
     return result;
 }
