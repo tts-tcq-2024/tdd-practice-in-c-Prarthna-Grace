@@ -26,12 +26,15 @@ int SingleZero(const char*input){
 }
 
 int replace_newline_with_addition(const char* input){
-    for ( const char* p = input; *p; ++p){
+    for ( const char* p = input,int i=0; *p,i<strlen(input); ++p,i++){
+        const char* input_copy;
         if (*p == '\n') {
-            input[0] = input[0] - '0' + input[1] - '0' ;  // Replace newline with comma 
-            return input;
-        }
+            input_copy[i] = input[0] - '0' + input[2] - '0' ;  // Replace newline with comma 
+            input_copy[i+1]=input[3];
+            input_copy[i+2]=input[4];         
+        }      
     }
+    return input_copy;
 }
 
 int AddifValid(const char* input) {
@@ -58,7 +61,7 @@ int add(const char* input){
     }
     else
     {
-        result = AddifValid(input_copy);
+        result = AddifValid(input);
         return result;
     } 
 }
