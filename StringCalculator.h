@@ -25,26 +25,27 @@ int SingleZero(const char*input){
     return (input[0]=='0');    
 }
 
-int replace_newline_with_addition(const char* input){
-    for ( const char* p = input,int i=0; *p,i<strlen(input); ++p,i++){
-        const char* input_copy;
+// Function to replace newline characters with commas
+void replace_newline_with_comma(char* input) {
+    for (char* p = input; *p; ++p) {
         if (*p == '\n') {
-            input_copy[i] = input[0] - '0' + input[2] - '0' ;  // Replace newline with comma 
-            input_copy[i+1]=input[3];
-            input_copy[i+2]=input[4];         
-        }      
+            *p = ',';  // Replace newline with comma
+        }
     }
-    return input_copy;
 }
 
 int AddifValid(const char* input) {
-    input=replace_newline_with_addition(const char* input);
-    // Assumes input is in the format "a,b"
-    if (input[1] == ',') {
-        // Convert the characters to integers and add them
-        return (input[0] - '0') + (input[2] - '0');
+    int sum = 0;
+    char* input_copy = strdup(input);  // Duplicate input to avoid modifying the original
+    char* token = strtok(input_copy, ",");  // Tokenize by comma
+    
+    while (token) {
+        sum += atoi(token);  // Convert token to integer and add to sum
+        token = strtok(NULL, ",");  // Continue tokenizing
     }
-    return 0;  // Return 0 if format is invalid
+
+    free(input_copy);  // Free the duplicated string
+    return sum;
 }
 
 int add(const char* input){
@@ -61,6 +62,7 @@ int add(const char* input){
     }
     else
     {
+        replace_newline_with_comma(input_copy);  // Replace newlines with commas
         result = AddifValid(input);
         return result;
     } 
