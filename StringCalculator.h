@@ -48,7 +48,7 @@ int add(const char* input){
         return 0;
     }
     else{
-        result = AddifValid(input,len);
+        result = AddifValid(input);
         return result;
     }
    
