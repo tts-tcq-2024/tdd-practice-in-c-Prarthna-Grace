@@ -26,12 +26,13 @@ int SingleZero(const char*input){
     return (input[0]=='0');    
 }
 
-int AddifValid(const char* input, int len){
-int result=0; 
-   if(len ==3 && input[1]==','){
-        result= atoi(input[0]) + atoi(input[2]);
+int AddifValid(const char* input) {
+    // Assumes input is in the format "a,b"
+    if (input[1] == ',') {
+        // Convert the characters to integers and add them
+        return (input[0] - '0') + (input[2] - '0');
     }
-    return result;
+    return 0;  // Return 0 if format is invalid
 }
 
 int add(const char* input){
