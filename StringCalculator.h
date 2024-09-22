@@ -42,7 +42,7 @@ int AddifValid(const char* input) {
 
     while (token) {
         int number = atoi(token);  // Convert token to integer
-        if (number <= 1000 && number>=0) 
+        if (number <= 1000 && number>=0) {
             sum += number;  // Add to sum if the number is 1000 or less
         }
         token = strtok(NULL, ",");  // Continue tokenizing
