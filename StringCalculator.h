@@ -99,7 +99,7 @@ int add(const char* input){
     {
         // Handle custom delimiter
         handle_custom_delimiter(input_copy);
-        //replace_newline_with_comma(input_copy);  // Replace newlines with commas
+        replace_newline_with_comma(input_copy);  // Replace newlines with commas
         result = AddifValid(input_copy);
         return result;
     } 
