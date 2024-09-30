@@ -41,6 +41,18 @@ int number_if_valid(int number)
 return (number <= 1000 && number>=0);
 }
 
+// Function to handle custom delimiter logic
+void handle_custom_delimiter(char* input) {
+    if (strncmp(input, "//", 2) == 0) {
+        char* newline_pos = strchr(input, '\n');
+        if (newline_pos) {
+            *newline_pos = '\0';  // Terminate the string at newline
+            const char* delimiter = input + 2;  // Get delimiter
+            replace_custom_delimiter(newline_pos + 1, delimiter);  // Replace custom delimiter
+        }
+    }
+}
+
 // Function to replace custom delimiter
 void replace_custom_delimiter(char* input, const char* delimiter) {
     char* pos;
@@ -83,17 +95,10 @@ int add(const char* input){
     { 
         return 0;
     }
-   
-    if (strncmp(input_copy, "//", 2) == 0) {
-        char* newline_pos = strchr(input_copy, '\n');
-        if (newline_pos) {
-            *newline_pos = '\0';  // Terminate the string at newline
-            const char* delimiter = input_copy + 2;  // Get delimiter
-            replace_custom_delimiter(newline_pos + 1, delimiter);  // Replace custom delimiter
-        }
-    }
     else
     {
+         // Handle custom delimiter
+        handle_custom_delimiter(input_copy);
         replace_newline_with_comma(input_copy);  // Replace newlines with commas
         result = AddifValid(input_copy);
         return result;
