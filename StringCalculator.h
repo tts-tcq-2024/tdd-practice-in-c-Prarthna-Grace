@@ -22,13 +22,8 @@ int isEmpty(const char* input) {
 }
 
 // Function to check if the input string is a single zero
-int SingleZero(const char*input){
-    if(len==10)
-    {
-        (input[0]=='0');
-    }
-        
-    return ;    
+int SingleZero(const char* input) {
+    return (strcmp(input, "0") == 0); // Return 1 if input is "0"
 }
 
 // Function to replace newline characters with commas
