@@ -73,6 +73,7 @@ int AddifValid(const char* input) {
 int add(const char* input){
     // Create a copy of the input
     char input_copy[100];
+    char delimiter[10] = ","; // Default delimiter is a comma
     strncpy(input_copy, input, sizeof(input_copy) - 1);
     input_copy[sizeof(input_copy) - 1] = '\0';  // Ensure null termination
     int len= strlen(input_copy); 
