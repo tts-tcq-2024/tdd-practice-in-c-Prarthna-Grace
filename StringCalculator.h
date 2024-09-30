@@ -5,6 +5,15 @@
 
 int add(const char* input);
 
+// Function to replace newline characters with commas
+void replace_newline_with_comma(char* input) {
+    for (char* p = input; *p; ++p) {
+        if (*p == '\n') {
+            *p = ',';  // Replace newline with comma
+        }
+    }
+
+
 // Function to handle custom delimiter logic
 char* getModifiedInput(const char* input, char* delimiter) {
     char* modifiedInput = strdup(input);
@@ -15,7 +24,7 @@ char* getModifiedInput(const char* input, char* delimiter) {
         *delimiter = modifiedInput[2];
         modifiedInput = modifiedInput + 4; // Skip the delimiter part (e.g., "//;\n")
     }
-    replace_newline_with_comma(input_copy);  // Replace newlines with commas
+    replace_newline_with_comma(modifiedInput);  // Replace newlines with commas
     return modifiedInput;
 }
 
@@ -41,14 +50,6 @@ int SingleZero(const char* input) {
     return (strcmp(input, "0") == 0); // Return 1 if input is "0"
 }
 
-// Function to replace newline characters with commas
-void replace_newline_with_comma(char* input) {
-    for (char* p = input; *p; ++p) {
-        if (*p == '\n') {
-            *p = ',';  // Replace newline with comma
-        }
-    }
-}
 
 //Function to check if the input numbers are valid for addition
 int number_if_valid(int number) 
