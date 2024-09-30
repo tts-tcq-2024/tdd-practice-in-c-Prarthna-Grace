@@ -64,7 +64,7 @@ int AddifValid(const char* input, const char* delimiter) {
         if (number_if_valid(number)) {
             sum += number;  // Add to sum if the number is 1000 or less
         }
-        token = strtok(NULL, ",");  // Continue tokenizing
+        token = strtok(NULL, delimiter);   // Continue tokenizing
     }
     free(input_copy);  // Free the duplicated string
     return sum;
