@@ -57,7 +57,6 @@ return (number <= 1000 && number>=0);
 int AddifValid(const char* input) {
     int sum = 0;
     char* input_copy = strdup(input);  // Duplicate input string
-    char* token = strtok(input_copy, ",");  // Tokenize by comma
     char* token = strtok(input_copy, delimiter);  // Tokenize by the custom delimiter
 
     while (token) {
