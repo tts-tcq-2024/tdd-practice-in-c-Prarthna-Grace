@@ -23,7 +23,12 @@ int isEmpty(const char* input) {
 
 // Function to check if the input string is a single zero
 int SingleZero(const char*input){
-    return (input[0]=='0');    
+    if(len==10)
+    {
+        (input[0]=='0');
+    }
+        
+    return ;    
 }
 
 // Function to replace newline characters with commas
@@ -40,6 +45,17 @@ int number_if_valid(int number)
 {
 return (number <= 1000 && number>=0);
 }
+
+// Function to replace custom delimiter
+void replace_custom_delimiter(char* input, const char* delimiter) {
+    char* pos;
+    while ((pos = strstr(input, delimiter)) != NULL) {
+        size_t len = strlen(delimiter);
+        *pos = ',';  // Replace the first character of delimiter with comma
+        memmove(pos + 1, pos + len, strlen(pos + len) + 1); // Move the rest of the string
+    }
+}
+
 
 //Function to add valid inputs
 int AddifValid(const char* input) {
@@ -67,12 +83,19 @@ int add(const char* input){
     int returnEmpty=0, result=0; 
     returnEmpty |= isEmpty(input_copy);
     returnEmpty |= Check_numbers(input_copy);
-    if(len==1){
-        returnEmpty |= SingleZero(input_copy);
-    }
+    returnEmpty |= SingleZero(input_copy);
     if(returnEmpty == 1)
     { 
         return 0;
+    }
+   
+    if (strncmp(input_copy, "//", 2) == 0) {
+        char* newline_pos = strchr(input_copy, '\n');
+        if (newline_pos) {
+            *newline_pos = '\0';  // Terminate the string at newline
+            const char* delimiter = input_copy + 2;  // Get delimiter
+            replace_custom_delimiter(newline_pos + 1, delimiter);  // Replace custom delimiter
+        }
     }
     else
     {
