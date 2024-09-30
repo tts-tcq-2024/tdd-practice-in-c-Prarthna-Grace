@@ -5,25 +5,14 @@
 
 int add(const char* input);
 
-// Function to replace custom delimiter
-void replace_custom_delimiter(char* input, const char* delimiter) {
-    char* pos;
-    size_t delimiter_length = strlen(delimiter);
-    
-    while ((pos = strstr(input, delimiter)) != NULL) {
-        *pos = ',';  // Replace first character of the delimiter with a comma
-        memmove(pos + 1, pos + delimiter_length, strlen(pos + delimiter_length) + 1); // Shift the rest of the string
-    }
-}
-
 // Function to handle custom delimiter logic
-void handle_custom_delimiter(char* input) {
+void handle_custom_delimiter(char* input, char* delimiter) {
     if (strncmp(input, "//", 2) == 0) {
         char* newline_pos = strchr(input, '\n');
         if (newline_pos) {
-            *newline_pos = '\0';  // Terminate string at newline
-            const char* delimiter = input + 2;  // Get the delimiter
-            replace_custom_delimiter(newline_pos + 1, delimiter);  // Replace custom delimiter
+            *newline_pos = '\0';  // Terminate the string at the newline
+            strcpy(delimiter, input + 2);  // Copy the delimiter after "//"
+            input = newline_pos + 1;  // Move input pointer to the part after the delimiter
         }
     }
 }
@@ -69,6 +58,7 @@ int AddifValid(const char* input) {
     int sum = 0;
     char* input_copy = strdup(input);  // Duplicate input string
     char* token = strtok(input_copy, ",");  // Tokenize by comma
+    char* token = strtok(input_copy, delimiter);  // Tokenize by the custom delimiter
 
     while (token) {
         int number = atoi(token);  // Convert token to integer
@@ -97,8 +87,7 @@ int add(const char* input){
     }
     else
     {
-        // Handle custom delimiter
-        handle_custom_delimiter(input_copy);
+        handle_custom_delimiter(input_copy, delimiter); // Handle custom delimiter
         replace_newline_with_comma(input_copy);  // Replace newlines with commas
         result = AddifValid(input_copy);
         return result;
