@@ -6,17 +6,19 @@
 int add(const char* input);
 
 // Function to handle custom delimiter logic
-void handle_custom_delimiter(char* input, char* delimiter) {
-    if (strncmp(input, "//", 2) == 0) {
-        char* newline_pos = strchr(input, '\n');
-        if (newline_pos) {
-            *newline_pos = '\0';  // Terminate the string at the newline
-            strcpy(delimiter, input + 2);  // Copy the delimiter after "//"
-            // Move input pointer to the part after the delimiter
-            input = newline_pos + 1;  
-        }
+char* getModifiedInput(const char* input, char* delimiter) {
+    char* modifiedInput = strdup(input);
+    *delimiter = ','; // Default delimiter
+
+    if (strncmp(modifiedInput, "//", 2) == 0) {
+        // Custom delimiter found
+        *delimiter = modifiedInput[2];
+        modifiedInput = modifiedInput + 4; // Skip the delimiter part (e.g., "//;\n")
     }
+    replace_newline_with_comma(input_copy);  // Replace newlines with commas
+    return modifiedInput;
 }
+
 
 //Function to check if the input string has numbers
 int Check_numbers(const char* input) {
@@ -57,17 +59,15 @@ return (number <= 1000 && number>=0);
 //Function to add valid inputs
 int AddifValid(const char* input, const char* delimiter) {
     int sum = 0;
-    char* input_copy = strdup(input);  // Duplicate input string
-    char* token = strtok(input_copy, delimiter);  // Tokenize by the custom delimiter
-
+    char* modifiedInput = getModifiedInput(input, &delimiter);
+    char* token = strtok( modifiedInput, &delimiter);  // Tokenize by the custom delimiter
     while (token) {
         int number = atoi(token);  // Convert token to integer
         if (number_if_valid(number)) {
             sum += number;  // Add to sum if the number is valid
         }
-        token = strtok(NULL, delimiter);  // Continue tokenizing with the custom delimiter
+        token = strtok(NULL, &delimiter);  // Continue tokenizing with the custom delimiter
     }
-    free(input_copy);  // Free the duplicated string
     return sum;
 }
 
@@ -88,8 +88,6 @@ int add(const char* input){
     }
     else
     {
-        handle_custom_delimiter(input_copy, delimiter); // Handle custom delimiter
-        replace_newline_with_comma(input_copy);  // Replace newlines with commas
         return AddifValid(input_copy, delimiter);
     } 
 }
