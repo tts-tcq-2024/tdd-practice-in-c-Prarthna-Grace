@@ -12,7 +12,8 @@ void handle_custom_delimiter(char* input, char* delimiter) {
         if (newline_pos) {
             *newline_pos = '\0';  // Terminate the string at the newline
             strcpy(delimiter, input + 2);  // Copy the delimiter after "//"
-            input = newline_pos + 1;  // Move input pointer to the part after the delimiter
+            // Move input pointer to the part after the delimiter
+            input = newline_pos + 1;  
         }
     }
 }
@@ -62,9 +63,9 @@ int AddifValid(const char* input, const char* delimiter) {
     while (token) {
         int number = atoi(token);  // Convert token to integer
         if (number_if_valid(number)) {
-            sum += number;  // Add to sum if the number is 1000 or less
+            sum += number;  // Add to sum if the number is valid
         }
-        token = strtok(NULL, delimiter);   // Continue tokenizing
+        token = strtok(NULL, delimiter);  // Continue tokenizing with the custom delimiter
     }
     free(input_copy);  // Free the duplicated string
     return sum;
