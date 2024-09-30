@@ -1,0 +1,99 @@
+Test Specification for StringCalculator
+
+1. Null Strings
+
+TEST ID: TC000
+INPUT: ""
+OUTPUT: 0
+REMARKS: Empty strings return 0.
+---------------------------------------------------
+2. Single Number
+
+TEST ID: TC001
+INPUT: "1"
+OUTPUT: 1
+REMARKS: Single number returns the number itself.
+----------------------------------------------------
+3. Two Numbers
+
+TEST ID: TC002
+INPUT: "1,2"
+OUTPUT: 3
+REMARKS: Returns the sum of two numbers.
+---------------------------------------------------
+4. Multiple Numbers
+
+TEST ID: TC003
+INPUT: "1,2,3"
+OUTPUT: 6
+REMARKS: Sums up multiple numbers.
+---------------------------------------------------
+5. New Line Delimiter
+
+TEST ID: TC004
+INPUT: "1\n2,3"
+OUTPUT: 6
+REMARKS: New line between numbers is handled correctly.
+---------------------------------------------------
+6. Trailing Comma
+
+TEST ID: TC005
+INPUT: "1,\n"
+OUTPUT: Exception
+REMARKS: Input with trailing comma and new line is not valid.
+---------------------------------------------------
+7. Custom Delimiter
+
+TEST ID: TC006
+INPUT: "//;\n1;2"
+OUTPUT: 3
+REMARKS: Custom delimiter is recognized and used.
+---------------------------------------------------
+8. Multiple Custom Delimiters
+
+TEST ID: TC007
+INPUT: "//[***]\n1***2***3"
+OUTPUT: 6
+REMARKS: Delimiter of any length is supported.
+---------------------------------------------------
+9. Negative Numbers
+
+TEST ID: TC008
+INPUT: "-1,2"
+OUTPUT: Exception: "negatives not allowed: -1"
+REMARKS: Throws exception or 0 for negative numbers.
+---------------------------------------------------
+10. Multiple Negative Numbers
+
+TEST ID: TC009
+INPUT: "-1,-2,3"
+OUTPUT: Exception: "negatives not allowed: -1, -2"
+REMARKS: Lists all negative numbers in exception.
+---------------------------------------------------
+11. Ignore Numbers Greater Than 1000
+
+TEST ID: TC010
+INPUT: "2,1001"
+OUTPUT: 2
+REMARKS: Numbers greater than 1000 are ignored.
+---------------------------------------------------
+12. Mixed Delimiters with Large Numbers
+
+TEST ID: TC011
+INPUT: "//;\n1001;2"
+OUTPUT: 2
+REMARKS: Large numbers are ignored with custom delimiter.
+---------------------------------------------------
+13. New Line and Comma Together
+
+TEST ID: TC012
+INPUT: "1\n2,3,1001"
+OUTPUT: 6
+REMARKS: Both new line and comma delimiters are handled.
+---------------------------------------------------
+14. Input with Only Negatives
+
+TEST ID: TC013
+INPUT: "//;\n-1;-2"
+OUTPUT: Exception: "negatives not allowed: -1, -2"
+REMARKS: Handles only negatives correctly.
