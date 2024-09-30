@@ -54,7 +54,7 @@ return (number <= 1000 && number>=0);
 }
 
 //Function to add valid inputs
-int AddifValid(const char* input) {
+int AddifValid(const char* input, const char* delimiter) {
     int sum = 0;
     char* input_copy = strdup(input);  // Duplicate input string
     char* token = strtok(input_copy, delimiter);  // Tokenize by the custom delimiter
@@ -89,8 +89,7 @@ int add(const char* input){
     {
         handle_custom_delimiter(input_copy, delimiter); // Handle custom delimiter
         replace_newline_with_comma(input_copy);  // Replace newlines with commas
-        result = AddifValid(input_copy);
-        return result;
+        return AddifValid(input_copy, delimiter);
     } 
 }
 
