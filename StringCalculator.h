@@ -24,7 +24,6 @@ char* getModifiedInput(const char* input, char* delimiter) {
         *delimiter = modifiedInput[2];
         modifiedInput = modifiedInput + 4; // Skip the delimiter part (e.g., "//;\n")
     }
-    replace_newline_with_comma(modifiedInput);  // Replace newlines with commas
     return modifiedInput;
 }
 
@@ -62,6 +61,7 @@ int AddifValid(const char* input, const char* delimiter) {
     int sum = 0;
     char* modifiedInput = getModifiedInput(input, &delimiter);
     char* token = strtok( modifiedInput, &delimiter);  // Tokenize by the custom delimiter
+    replace_newline_with_comma(modifiedInput);  // Replace newlines with commas
     while (token) {
         int number = atoi(token);  // Convert token to integer
         if (number_if_valid(number)) {
@@ -89,7 +89,7 @@ int add(const char* input){
     }
     else
     {
-        return AddifValid(input_copy, delimiter);
+        return AddifValid(input_copy, &delimiter);
     } 
 }
 
