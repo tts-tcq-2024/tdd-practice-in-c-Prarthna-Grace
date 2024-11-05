@@ -1,51 +1,32 @@
-#include <stdio.h>
 #include <string.h>
-#include <ctype.h>
+#include <stdio.h>
 #include <stdlib.h>
 
-int add(const char* input);
-
-// Function to replace newline characters with commas
-void replace_newline_with_comma(char* input) {
-    for (char* p = input; *p; ++p) {
-        if (*p == '\n') {
-            *p = ',';  // Replace newline with comma
-        }
+// this function is a common helper function to check if input is a digit i.e (0-9)
+int isDigit(char character) {
+    if(character >= '0' && character <= '9') {
+        return 1;
+    }
+    else {
+        return 0;
     }
 }
 
-// Function to check if the input string has numbers
-int Check_numbers(const char* input) {
-    while (*input) {
-        if (isdigit(*input)) {
-            return 0;  // Return 0 (true) if any digit is found
-        }
-        input++;  // Move to the next character
+// this function prints an exception onto the console if the input has a negative number along with the negative inputs
+void printExceptionForNegativeNumbers(int negativeDigits[], int count) {
+    printf("Exception: negativeDigits not allowed ");
+    for (int index = 0; index < count; index++) {
+        printf("%d ", negativeDigits[index]);
     }
-    return 1;  // Return 1 if no digits are found
+    printf("\n");
 }
 
-// Function to check if the input string is empty
-int isEmpty(const char* input) {
-    return (input[0] == '\0');  // Return 1 if string is empty, 0 otherwise
-}
-
-// Function to check if the input string is a single zero
-int SingleZero(const char* input) {
-    return (strcmp(input, "0") == 0); // Return 1 if input is "0"
-}
-
-// Function to check if the input numbers are valid for addition
-int number_if_valid(int number) {
-    return (number <= 1000 && number >= 0);
-}
-
-// This function checks for two consecutive digits
+// this function checks for two consecutive digits
 int shouldInsertComma(char currentChar, char nextChar) {
-    return isdigit(currentChar) && isdigit(nextChar);
+    return isDigit(currentChar) && isDigit(nextChar);
 }
 
-// This function inserts a comma between two consecutive digits
+// this function inserts a comma between two consecutive digits
 void insertCommasBetweenDigits(char *numbers) {
     char temp[512];
     int commaIndex = 0;
@@ -59,32 +40,104 @@ void insertCommasBetweenDigits(char *numbers) {
     strcpy(numbers, temp);  
 }
 
-// This helper function ensures the end index is greater than the start index of the input string i.e., valid length
+// this function checks whether the next character of the input string is NOT a digit and if the string has reached its end i.e null-terminated
+int checkIfNextCharIsNotNumber(char nextChar) {
+    if((nextChar == '\0' || !isDigit(nextChar))) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+// this function checks for invalid characters in the input string
+int hasInvalidSequence(char currentChar, char nextChar, char character) {
+    return currentChar == character && checkIfNextCharIsNotNumber(nextChar);
+}
+
+// this function uses a helper function to check if the characters of the input string other than the delimiters are digits and if it can be passed to the add function
+int isInputInvalid(int index, const char* numbers) {
+    if(hasInvalidSequence(numbers[index], numbers[index + 1],',') || hasInvalidSequence(numbers[index], numbers[index + 1],'\n')) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+}
+
+// this function is used to act as a check for a single input as the sum in such a case cannot be calculated
+int validateInput(const char *numbers) {
+    int returnValue = 1;
+    for (int index = 0; numbers[index] != '\0'; index++) {
+        if (isInputInvalid(index,numbers)) {
+            printf("Exception: Invalid input sequence at position %d.\n", index);
+            returnValue = 0;
+        }
+    }
+    return returnValue;
+}
+
+// this function is used as a check for valid digits for further processing
+int parseDigits(const char* input) {
+    int containsDigit = 0;
+    for (int index = 0; input[index] != '\0'; index++) {
+        if (isDigit(input[index])) {
+            containsDigit = 1;
+        }
+    }
+    return !containsDigit;
+}
+
+// this function checks for non-numeric or empty input string
+int isNonNumericOrEmptyInput(const char *input) {
+    if (strlen(input) == 0) {
+        return 1;
+    }
+    return parseDigits(input);
+}
+
+// this function checks for custom delimiter with the specified format
+int isCustomDelimiter(char *stringCopy) {
+    return strncmp(stringCopy, "//", 2) == 0;
+}
+
+// this helper function ensures the end index is greater than the start index of the input string i.e valid length
 int parseInputIfValid(char *start, char *end) {
-    return (end > start);
+    if(end > start) {
+        return 1;
+    }
+    return 0;
 }
 
-// This helper function parses the input string characters only if its length is non-zero
+// this helper function parses the input string characters only if its length is non-zero
 int parseInputIfNotNull(char *start, char *end) {
-    return (start != NULL && end != NULL);
+    if(start != NULL && end != NULL) {
+        return 1;
+    }
+    return 0;
 }
 
-// This function does the initial valid input string checks for custom delimiter functionality
+// this function does the initial valid input string checks for custom delimiter functionality
 int parseInput(char *start, char *end) {
-    return (parseInputIfNotNull(start, end) && parseInputIfValid(start, end));
+    if(parseInputIfNotNull(start,end) && parseInputIfValid(start,end)) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
 }
 
-// This function extracts the delimiter based on the given format
+// this function extracts the delimiter based on the given format
 void extractCustomDelimiter(char *stringCopy, char *delimiter) {
     char *start = strchr(stringCopy, '[');
     char *end = strchr(stringCopy, ']');
-    if (parseInput(start, end)) {
+    if (parseInput(start,end)) {
         strncpy(delimiter, start + 1, end - start - 1);
         delimiter[end - start - 1] = '\0';
     }
 }
 
-// This function handles a case where the custom delimiter is empty
+// this function handles a case where the custom delimiter is empty
 void handleEmptyDelimiter(char *numbers, char *delimiter) {
     if (strcmp(delimiter, "") == 0) {
         insertCommasBetweenDigits(numbers);
@@ -92,19 +145,23 @@ void handleEmptyDelimiter(char *numbers, char *delimiter) {
     }
 }
 
-// Placeholder function to check if a custom delimiter is specified (implement as needed)
-int isCustomDelimiter(const char *input) {
-    return strncmp(input, "//", 2) == 0;
+// this function deals with processing of negative digits and storing it into an array
+int processNegativeNumber(int number, int negativeDigits[], int *negativeCount) {
+    if (number < 0) {
+        negativeDigits[(*negativeCount)++] = number;
+        return 0;
+    }
+    return 1;
 }
 
-// Placeholder function to get modified input (implement as needed)
-char* getModifiedInput(const char *input, const char **delimiter) {
-    char *modifiedInput = strdup(input);  // Copy input to modifiable buffer
-    replace_newline_with_comma(modifiedInput);
-    return modifiedInput;
+// this function only considers numbers of the input string that are less than or equal to 1000, and ignores the numbers that are greater than 1000.
+void addToSumIfValid(int number, int *sum) {
+    if (number <= 1000) {
+        *sum += number;
+    }
 }
 
-// This function combines all the helper functions to check for a valid input string with custom delimiter
+// this function combines all the helper functions to check for a valid input string with custom delimiter
 void validateCustomDelimiter(char *stringCopy, char **numbers, char *delimiter) {
     if (isCustomDelimiter(stringCopy)) {
         extractCustomDelimiter(stringCopy, delimiter);
@@ -113,43 +170,48 @@ void validateCustomDelimiter(char *stringCopy, char **numbers, char *delimiter) 
     }
 }
 
-// Function to add valid inputs
-int AddifValid(const char* input, const char* delimiter) {
-    int sum = 0;
-    char* modifiedInput = getModifiedInput(input, &delimiter);
-    char* token = strtok(modifiedInput, delimiter);  // Tokenize by the custom delimiter
-    while (token) {
-        int number = atoi(token);  // Convert token to integer
-        if (number_if_valid(number)) {
-            sum += number;  // Add to sum if the number is valid
-        }
-        token = strtok(NULL, delimiter);  // Continue tokenizing with the custom delimiter
+// this function takes care of negative digits in input string
+int HandleNegatives(int negativeCount, int negativeDigits[],int sum) {
+    if (negativeCount > 0) {
+        printExceptionForNegativeNumbers(negativeDigits, negativeCount);
+        sum = 0;
     }
-    free(modifiedInput);  // Free allocated memory
     return sum;
 }
 
-// Main function to add numbers based on input
-int add(const char* input) {
-    // Create a copy of the input
-    char input_copy[100];
-    char delimiter[10] = ",";  // Default delimiter is a comma
-    char *numbers;
-
-    strncpy(input_copy, input, sizeof(input_copy) - 1);
-    input_copy[sizeof(input_copy) - 1] = '\0';  // Ensure null termination
-
-    int returnEmpty = 0;
-
-    returnEmpty |= isEmpty(input_copy);
-    returnEmpty |= Check_numbers(input_copy);
-    returnEmpty |= SingleZero(input_copy);
-
-    validateCustomDelimiter(input_copy, &numbers, delimiter);
-
-    if (returnEmpty == 1) {
-        return 0;
-    } else {
-        return AddifValid(numbers, delimiter);
+// this function does the actual addition calculation to get the final sum as result
+int calculateSum(char *numbers, char delimiter[]) {
+    char *token = strtok(numbers, delimiter);
+    int sum = 0;
+    int negativeDigits[256];
+    int negativeCount = 0;
+    while (token != NULL) {
+        int number = atoi(token);
+        if (!processNegativeNumber(number, negativeDigits, &negativeCount)) {
+            token = strtok(NULL, delimiter);
+            continue;
+        }
+        addToSumIfValid(number, &sum);
+        token = strtok(NULL, delimiter);
     }
+    sum = HandleNegatives(negativeCount,negativeDigits,sum);
+    return sum;
+}
+
+// this function makes use of other functions to get the final result
+int add(const char *stringInput) {
+    int result = 0;
+    if(isNonNumericOrEmptyInput(stringInput)) {
+        return 0;
+    }
+    char stringCopy[512];
+    strcpy(stringCopy, stringInput);
+    char delimiter[256] = ",\n;*";
+    char *numbers = stringCopy;
+    validateCustomDelimiter(stringCopy, &numbers, delimiter);
+    if(validateInput(numbers))
+    {
+        result = calculateSum(numbers,delimiter);
+    }
+    return result;
 }
